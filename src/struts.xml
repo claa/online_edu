@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.saveDir" value="D:\程序源代码\Java Web\online_edu_deyu\WebRoot\WEB-INF\file"></constant>
+    <package name="default" namespace="/" extends="struts-default">
+    	<!-- 刘卫卫 -->
+        <action name="login" class="nuc.edu.action.post.LoginAction" >
+        	<result name="loginOK_0">/index.jsp</result>
+        	<result name="loginOK_1">/index.jsp</result>
+        	<result name="loginFail">/login.jsp</result>
+        </action>
+        <action name="post_*" class="nuc.edu.action.post.PostAction" method="{1}Method">
+        	<result name="post_sendOK" type="chain">
+        		post_findByMajor
+        	</result>
+        	<result name="post_sendFail">/sendPost.jsp</result>
+        	<result name="findByMajorOK">/selectPost.jsp</result>
+        	<result name="showPostContentOK">/showPostContent.jsp</result>
+        	<result name="commentPostOK">/showPostContent.jsp</result>
+        	<result name="commentPostFail">/showPostContent.jsp</result>
+        </action>
+        <action name="allMajor" class="nuc.edu.action.post.AllMajor" method="selectAllMajorMethod">
+        	<result name="selectAllMajorOK">/allMajor.jsp</result>
+        </action>
+        <action name="allAcademy" class="nuc.edu.action.post.AllAcademy" method="selectAllAcademyMethod">
+        	<result name="selectAllOK">/allAcademy.jsp</result>
+        </action>
+        
+       
+       <!-- 刘峰瑞 -->
+       <action name="login1"    class="nuc.edu.action.forum.LoginAction" >
+             <result>/forummain.jsp</result>
+       </action>
+       <action name="add_SForum"   class="nuc.edu.action.forum.ForumAction"   method="addSForum">
+            <result name="addSFormOK"  type="chain">
+           select_Forum
+            </result>
+            <result name="input">/index.jsp</result>
+       </action>
+      <action name="select_Forum"  class="nuc.edu.action.forum.ForumAction"  method="selectForum">
+              <result name="selectForumOK">/forumType.jsp</result>
+      </action>
+      <action name="select_SForumById"  class="nuc.edu.action.forum.ForumAction"   method="selectSForumById">
+             <result name="selectSForumByIdOK">/forumdetail.jsp</result>
+      </action>
+      <action name="add_Answer"   class="nuc.edu.action.forum.AnswerAction"   method="addAnswer">
+             <result name="addAnswerOK"    type="chain">
+            select_SForumById
+                  
+             </result>
+      </action>
+      <action  name="addAnswer_Like_id"    class="nuc.edu.action.forum.AnswerAction"   method="addAnswer_Like_id">
+              <result  name="addAnswer_Like_idOK"    type="chain">
+                 select_SForumById
+              </result>
+      </action>
+      
+      <!-- 呼星星 -->
+       <action name="addStudent" class="nuc.edu.action.prletter.AddQuestionOrAnswer" method="studentExecute">
+               <result name="success"> /index.jsp </result>
+               <result name="input"> /index.jsp </result>
+           </action>
+           
+           <action name="addTeacher" class="nuc.edu.action.prletter.AddQuestionOrAnswer" method="teacherExecute">
+               <result name="success"> /index.jsp </result>
+               <result name="input"> /index.jsp </result>
+           </action>
+           
+           <action name="studentSendInfo" class="nuc.edu.action.prletter.QuerySendInfo" method="studentExecute">
+               <result name="success"> /test.jsp </result>
+               <result name="input"> /index.jsp </result>
+           </action>
+           
+           <action name="teacherSendInfo" class="nuc.edu.action.prletter.QuerySendInfo" method="teacherExecute">
+               <result name="success"> /test.jsp </result>
+               <result name="input"> /index.jsp </result>
+           </action>
+           
+           <action name="studentReceiveInfo" class="nuc.edu.action.prletter.QueryReceiveInfo" method="studentExecute">
+               <result name="success"> /test.jsp </result>
+               <result name="input"> /index.jsp </result>
+           </action>
+           
+           <action name="teacherReceiveInfo" class="nuc.edu.action.prletter.QueryReceiveInfo" method="teacherExecute">
+               <result name="success"> /test.jsp </result>
+               <result name="input"> /index.jsp </result>
+           </action>
+           
+           <action name="modifyRead" class="nuc.edu.action.prletter.ModifyRead">
+               <result name="success"> /index.jsp </result>
+               <result name="input"> /index.jsp </result>
+           </action>
+           
+           <action name="removeStudentPrletter" class="nuc.edu.action.prletter.RemovePrletter" method="studentExecute">
+               <result name="success"> /index.jsp </result>
+               <result name="input"> /index.jsp </result>
+           </action>
+           
+           <action name="removeTeacherPrletter" class="nuc.edu.action.prletter.RemovePrletter" method="teacherExecute">
+               <result name="success"> /index.jsp </result>
+               <result name="input"> /index.jsp </result>
+           </action>
+           
+           <action name="queryAnswer" class="nuc.edu.action.prletter.QueryAnswer">
+               <result name="success"> /test.jsp </result>
+               <result name="input"> /index.jsp </result>
+           </action>
+           
+           <action name="queryTeacherInfo" class="nuc.edu.action.prletter.QueryTeacherInfo">
+               <result name="success"> /test.jsp </result>
+               <result name="input"> /index.jsp </result>
+           </action>
+           
+           
+        <!-- 徐涛 -->
+        <!--登录操作  -->
+       <action name="testlogin" class="nuc.edu.action.login.LoginAction" method="testLogin">
+             <result name="loginTeacher">/firstpage.jsp</result>
+             <result name="loginStudent">/firstpage.jsp</result>
+             <result name="loginAdmin">/pages/login/loginAdmin.jsp</result>
+             <result name="error">/pages/login/login1.jsp</result>
+             <result name="input">/pages/login/login1.jsp</result>
+       </action>
+      <action name="getpass" class="nuc.edu.action.login.LoginAction" method="getPass">
+             <result name="getOk">/pages/login/pass.jsp</result>
+             <result name="error">/pages/login/getpass.jsp</result>
+               <result name="input">/pages/login/getpass.jsp</result>
+       </action>
+       
+       <!--管理员对帖子的操作  -->
+       <action name="insert" class="nuc.edu.action.admin.PostAction" method="InsertPost">
+              <result name="insertOk">/pages/admin/success.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+       <action name="delete" class="nuc.edu.action.admin.PostAction" method="DeletePost">
+             <result name="deleteOk">/pages/admin/success.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+       <action name="findAll" class="nuc.edu.action.admin.PostAction" method="findAllPost">
+              <result name="findAllOk">/pages/admin/all.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+       <action name="find" class="nuc.edu.action.admin.PostAction" method="findById">
+             <result name="findOk">/pages/admin/find.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+       <action name="top" class="nuc.edu.action.admin.PostAction" method="TopPost">
+             <result name="topOk">/pages/admin/success.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+       <action name="publish" class="nuc.edu.action.admin.PostAction" method="findOrder">
+              <result name="publishOk">/pages/admin/publish.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+       <action name="findTop" class="nuc.edu.action.admin.PostAction" method="findTopPost">
+              <result name="findTopOk">/pages/admin/findTop.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+       
+       <!-- 管理员对教师的操作 -->
+       <action name="insertt" class="nuc.edu.action.admin.TeacherAction" method="InsertTeacher">
+              <result name="insertOk">/pages/admin/success.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+        <action name="deletet" class="nuc.edu.action.admin.TeacherAction" method="DeleteTeacher">
+              <result name="deleteOk">/pages/admin/success.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+        <action name="findAllt" class="nuc.edu.action.admin.TeacherAction" method="findAllTeacher">
+              <result name="findAllOk">/pages/admin/allt.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+        <action name="findt" class="nuc.edu.action.admin.TeacherAction" method="findById">
+              <result name="findOk">/pages/admin/findt.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+        <action name="updatet" class="nuc.edu.action.admin.TeacherAction" method="UpdateTeacher">
+              <result name="updateOk">/pages/admin/success.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+       <!-- 管理员对学生的操作 -->
+       <action name="findAlls" class="nuc.edu.action.admin.StudentAction" method="findAllStudent">
+              <result name="findAllOk">/pages/admin/alls.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+       
+       <!-- 管理员对学院的操作  -->
+       <action name="insertm" class="nuc.edu.action.admin.MajorAction" method="InsertMajor">
+              <result name="insertOk">/pages/admin/success.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+       <action name="deletem" class="nuc.edu.action.admin.MajorAction" method="DeleteMajor">
+              <result name="deleteOk">/pages/admin/success.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+        <action name="findAllm" class="nuc.edu.action.admin.MajorAction" method="findAllMajor">
+              <result name="findAllOk">/pages/admin/allm.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+        <action name="findm" class="nuc.edu.action.admin.MajorAction" method="findById">
+              <result name="findOk">/pages/admin/findm.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+        <action name="updatem" class="nuc.edu.action.admin.MajorAction" method="UpdateMajor">
+              <result name="updateOk">/pages/admin/success.jsp</result>
+              <result name="error">/pages/admin/error.jsp</result>
+       </action>
+       
+       <!-- 张德钰 -->
+       <action name="uploadAction" class="nuc.edu.action.task.UploadAction" method="upload">
+        	<param name="savePath">D:\程序源代码\Java Web\online_edu_deyu\WebRoot\WEB-INF\task</param>
+            <result type="chain" name="uploadOK">querryAction</result>
+            <!-- <result name="uploadOK">success.jsp</result> -->
+            
+           <result name="input">upload.jsp</result>
+        </action>
+        <action name="querryAction" class="nuc.edu.action.task.QuerryAction" method="querry">
+            <result name="querryOK">showtask.jsp</result>
+           <result name="input">upload.jsp</result>
+        </action>
+    </package>
+</struts>
